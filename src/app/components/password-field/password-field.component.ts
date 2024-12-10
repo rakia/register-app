@@ -20,8 +20,12 @@ export class PasswordFieldComponent implements OnInit {
 
   ngOnInit(): void {
     this.passwordFormControl.valueChanges
-      .pipe(debounceTime(200), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        debounceTime(200), // wait for 200ms after the last keystroke
+        distinctUntilChanged(), // trigger only when the value actually changes
+        takeUntilDestroyed(this.destroyRef)) // unsubscribe when the component is destroyed
       .subscribe((value) => {
+        // run logic
         this.passwordStrength = this.calculatePasswordStrength(value);
       });
   }
