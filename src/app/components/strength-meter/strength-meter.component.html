@@ -1,0 +1,6 @@
+<div class="relative mt-2" role="status" aria-live="polite" [attr.aria-label]="strengthLabel">
+  <div class="h-2 w-full bg-gray-200 rounded-lg">
+    <div [ngClass]="strengthClass" class="h-full rounded-lg" [style.width.%]="strength * 20"></div>
+  </div>
+  <div class="flex items-start mt-1 text-gray-500"> {{ strengthLabel }}</div>
+</div>

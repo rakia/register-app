@@ -1,18 +1,31 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-  <form class="w-full max-w-md bg-white p-6 rounded-lg shadow-md" [formGroup]="form">
-    <h1 id="registration-form-title" class="text-xl font-bold mb-4">Registration Form</h1>
+  <form
+    class="w-full max-w-md bg-white p-6 rounded-lg shadow-md" [formGroup]="form"
+    aria-labelledby="registration-form"
+  >
+    <h1 id="registration-form" class="text-xl font-bold mb-4" tabindex="0">Registration Form</h1>
 
+    <!-- Email Input -->
     <label for="email" class="block text-sm font-medium">Email</label>
     <input
       id="email"
       type="email"
       class="block w-full mt-1 mb-4 p-2 border border-gray-300 rounded-lg"
       formControlName="email"
+      [attr.aria-invalid]="form.get('email')?.invalid"
+      aria-required="true"
       required
     />
+    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+      <p id="email-error" class="text-sm text-red-500" aria-live="assertive">
+        Please enter a valid email address.
+     </p>
+    }
 
-    <app-password-field [passwordFormControl]="passwordFormControl"></app-password-field>
+    <!-- Password Input -->
+    <app-password-field [passwordFormControl]="passwordFormControl" aria-required="true"></app-password-field>
 
+    <!-- Terms of Service Checkbox -->
     <div class="flex items-start mt-4">
       <input
         type="checkbox"
@@ -20,10 +33,13 @@
         class="mr-2"
         formControlName="terms"
         required
+        aria-required="true"
+        [attr.aria-invalid]="form.get('terms')?.invalid"
       />
       <label for="terms" class="text-sm">Accept Terms of Service</label>
     </div>
 
+    <!-- Submit Button -->
     <button
       type="submit"
       class="w-full bg-blue-600 text-white p-2 rounded-lg mt-4 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"

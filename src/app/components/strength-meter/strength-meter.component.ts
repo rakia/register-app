@@ -3,14 +3,9 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-strength-meter',
+  templateUrl: './strength-meter.component.html',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="h-2 w-full bg-gray-200 rounded-lg mt-2">
-      <div [ngClass]="strengthClass" class="h-full rounded-lg" [style.width.%]="strength * 20"></div>
-    </div>
-    <div class="flex items-start mt-1 text-gray-500"> {{ strengthLabel }}</div>
-  `,
   imports: [NgClass]
 })
 export class StrengthMeterComponent implements OnChanges {

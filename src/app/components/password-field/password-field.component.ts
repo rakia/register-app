@@ -26,6 +26,10 @@ export class PasswordFieldComponent implements OnInit {
       });
   }
 
+  /**
+   * In the passwordRules, we check whether each the user has considered each factor that makes their password stronger.
+   * This is reflected on the UI as well to guide the user.
+   */
   get passwordRules() {
     const password = this.passwordFormControl.value || '';
     return {
