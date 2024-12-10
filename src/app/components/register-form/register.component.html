@@ -1,0 +1,35 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+  <form class="w-full max-w-md bg-white p-6 rounded-lg shadow-md" [formGroup]="form">
+    <h1 id="registration-form-title" class="text-xl font-bold mb-4">Registration Form</h1>
+
+    <label for="email" class="block text-sm font-medium">Email</label>
+    <input
+      id="email"
+      type="email"
+      class="block w-full mt-1 mb-4 p-2 border border-gray-300 rounded-lg"
+      formControlName="email"
+      required
+    />
+
+    <app-password-field [passwordFormControl]="passwordFormControl"></app-password-field>
+
+    <div class="flex items-start mt-4">
+      <input
+        type="checkbox"
+        id="terms"
+        class="mr-2"
+        formControlName="terms"
+        required
+      />
+      <label for="terms" class="text-sm">Accept Terms of Service</label>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-600 text-white p-2 rounded-lg mt-4 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+      [disabled]="form.invalid || form.untouched"
+    >
+      Register
+    </button>
+  </form>
+</div>
