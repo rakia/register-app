@@ -8,13 +8,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PasswordFieldComponent } from '../password-field/password-field.component';
+import { passwordStrengthValidator } from './password-strength.validator';
 
 @Component({
     selector: 'register-form',
@@ -47,7 +48,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), passwordStrengthValidator()]],
       terms: [false, Validators.requiredTrue],
     });
   }
