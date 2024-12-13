@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -9,6 +17,7 @@ import { NgClass } from '@angular/common';
   imports: [NgClass]
 })
 export class StrengthMeterComponent implements OnChanges {
+  cdRef = inject(ChangeDetectorRef);
   @Input() strength: number = 0;
   strengthLabel: string = '';
   strengthClass: 'bg-green-500' | 'bg-yellow-500' | 'bg-red-500' | undefined;
@@ -16,6 +25,7 @@ export class StrengthMeterComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['strength'].currentValue) {
       this.calculateStrengthClass(this.strength);
+      this.cdRef.markForCheck();
     }
   }
 
